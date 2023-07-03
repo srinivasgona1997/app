@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://127.0.0.1:5500/pr.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <link rel="stylesheet" href="./Age Calculator_files/style.css">
+    <style>
+      body {
+  margin: 0;
+  padding: 20px;
+  font-family: "Montserrat", sans-serif;
+  background-color: #f7f7f7;
+}
+
+.container {
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 5px;
+  margin-top: 50px;
+}
+
+h1 {
+  font-size: 36px;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 300px;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0062cc;
+}
+
+#result {
+  margin-top: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Age Calculator</h1>
+        <div class="form">
+            <label for="birthday">Enter you date of birth</label>
+            <input type="date" id="birthday" name="birthday">
+            <button id="btn" fdprocessedid="1q9l8">Calculate Age</button>
+            <p id="result">Your age is 21 years old</p>
+        </div>
+    </div>
+
+    <script>
+      const btnEl = document.getElementById("btn");
+const birthdayEl = document.getElementById("birthday");
+const resultEl = document.getElementById("result");
+
+function calculateAge() {
+  const birthdayValue = birthdayEl.value;
+  if (birthdayValue === "") {
+    alert("Please enter your birthday");
+  } else {
+    const age = getAge(birthdayValue);
+    resultEl.innerText = `Your age is ${age} ${age > 1 ? "years" : "year"} old`;
+  }
+}
+
+function getAge(birthdayValue) {
+  const currentDate = new Date();
+  const birthdayDate = new Date(birthdayValue);
+  let age = currentDate.getFullYear() - birthdayDate.getFullYear();
+  const month = currentDate.getMonth() - birthdayDate.getMonth();
+
+  if (
+    month < 0 ||
+    (month === 0 && currentDate.getDate() < birthdayDate.getDate())
+  ) {
+    age--;
+  }
+
+  return age;
+}
+
+btnEl.addEventListener("click", calculateAge);
+    </script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+</body></html>
